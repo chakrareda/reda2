@@ -1,0 +1,32 @@
+<div class="content">
+    <div class="brand">
+        <a class="link" routerLink="/index">My Mailboxes</a>
+    </div>
+    <form class="form-horizontal" action="javascript:;" [formGroup]="LoginUser" novalidate="novalidate">
+        <h2 class="login-title">S'identifier</h2>
+        <div class="form-group">
+            <div class="input-group-icon right">
+                <div class="input-icon"><i class="fa fa-envelope"></i></div>
+                <input class="form-control input-rounded"  type="text" name="login" placeholder="Login" autocomplete="off"  formControlName="username" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group-icon right">
+                <div class="input-icon"><i class="fa fa-lock font-16"></i></div>
+                <input class="form-control input-rounded"  type="password" id="password"  formControlName="password" name="password" placeholder="le mot de passe" required>
+            </div>
+        </div>
+        <div class="form-group d-flex justify-content-between">
+            <label class="ui-checkbox ui-checkbox-info">
+                <input type="checkbox">
+                <span class="input-span"></span>Souviens-toi de moi</label>
+            <a routerLink="/forgot_password">mot de passe oublié?</a>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-info btn-block" type="submit"  [disabled]= "LoginUser.prestine || LoginUser.invalid" (click)=checkLogin(user1)>Login</button>
+        </div>
+        <div class="text-center">Pas un membre?
+            <a class="color-blue" routerLink="/register">Créer un compte</a>
+        </div>
+    </form>
+</div>

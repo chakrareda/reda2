@@ -1,0 +1,46 @@
+<div id="sidebar-collapse">
+    <div class="admin-block d-flex">
+        <div>
+            <img src="./assets/img/admin-avatar.png" width="45px" />
+        </div>
+        <div class="admin-info">
+            <div class="font-strong">{{name_User}}</div><small>Bienvenue</small></div>
+
+    </div>
+    <ul class="side-menu metismenu">
+       
+        <li>
+            <a routerLink="/mailbox" routerLinkActive="active"><i class="sidebar-item-icon fa big-icon fa-book"></i>
+                <span class="nav-label"> Boîte de réception</span>
+            </a>
+        </li>
+        <li>
+            <a routerLink="/mail_view" routerLinkActive="active"><i class="sidebar-item-icon fa big-icon fa-send"></i>
+                <span class="nav-label">Éléments envoyés</span>
+            </a>
+        </li>
+        <li>
+            <a routerLink="/mail_compose" routerLinkActive="active"><i class="sidebar-item-icon fa big-icon fa-plus"></i>
+                <span class="nav-label">Nouveau courrier</span>
+            </a>
+        </li>
+     
+
+        <li>
+            <a routerLink="/carnets" routerLinkActive="active"><i class="sidebar-item-icon fa fa-address-book"></i>
+                <span class="nav-label">Carnet</span>
+            </a>
+        </li>
+
+        <li>
+            <a routerLink="/comptes" routerLinkActive="active"><i class="sidebar-item-icon fa fa-user-circle"></i>
+                <span class="nav-label">Compte</span>
+            </a>
+        </li>
+        <li>
+                <a routerLink="/calendar" routerLinkActive="active"><i class="sidebar-item-icon fa fa-calendar"></i>
+                    <span class="nav-label">Calendar</span>
+                </a>
+            </li>
+    </ul>
+</div>

@@ -1,0 +1,32 @@
+<div class="content">
+    <div class="brand">
+        <a class="link" routerLink="/index">My Mailboxes</a>
+    </div>
+    <form class="form-horizontal"  action="javascript:;"  [formGroup]="AddUser" novalidate="novalidate">
+        <h2 class="login-title">S'inscrire</h2>
+       
+        <div class="form-group">
+            <input class="form-control input-rounded"  type="text" name="login" placeholder="Login" autocomplete="off"  formControlName="username" required>
+        </div>
+        <div class="form-group">
+            <input class="form-control input-rounded"  type="password" id="password"  formControlName="password" name="password" placeholder="le mot de passe" required>
+        </div>
+        <div class="form-group">
+            <input class="form-control input-rounded" type="password" name="password_confirmation" placeholder="confirmer le mot de passe" required>
+        </div>
+        <div class="form-group text-left">
+            <label class="ui-checkbox ui-checkbox-info">
+                <input type="checkbox" name="agree">
+                <span class="input-span"></span>J'accepte les conditions et la politique</label>
+        </div>
+        <div class="form-group">
+            <button type="reset" class="btn btn-default">Annuler</button>
+            <button  type="submit" [disabled]= "AddUser.prestine || AddUser.invalid" class="  pull-right btn btn-info notika-btn-cyan"  (click)="enregistrer()"  >Créer un Compte</button>
+        
+        </div>
+       
+        <div class="text-center">Déjà membre?
+            <a class="color-blue" routerLink="/login">Connectez-vous ici</a>
+        </div>
+    </form>
+</div>

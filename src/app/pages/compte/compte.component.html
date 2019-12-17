@@ -1,0 +1,211 @@
+<hr>
+<div *ngIf="operation == 'Add'" class="alert alert-success alert-dismissable fade show" >
+  <button class="close" data-dismiss="alert" aria-label="Close">×</button><strong>Succès!</strong> L'operation été bien fait.</div>
+<div *ngIf="operation == 'Update'" class="alert alert-warning alert-dismissable fade show">
+  <button class="close" data-dismiss="alert" aria-label="Close">×</button><strong>Succès!</strong> L'operation été bien fait.</div>
+  <div  *ngIf="operation == 'Delete'" class="alert alert-danger alert-dismissable fade show">
+    <button class="close" data-dismiss="alert" aria-label="Close">×</button><strong>Succès!</strong> L'operation été bien fait.</div>
+  
+
+<div class="page-heading">
+  <h1 class="page-title">Gestion des Comptes</h1>
+  <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+          <a href="index.html"><i class="la la-home font-20"></i></a>
+      </li>
+  </ol>
+</div>
+<div class="page-content fade-in-up">
+  <div class="row">
+      <div class="col-xl-8">
+          <div class="ibox">
+              <div class="ibox-head">
+                  <div class="ibox-title">
+                      Liste des comptes
+                 </div>
+                 <button class="pull-right btn btn-outline-primary fa fa-plus-circle " (click)="operation ='Ajouter'; " > Ajouter</button>
+
+              </div>
+              <div class="ibox-body">
+                  <table class="table"  *ngIf="comptes">
+                      <thead>
+                          <tr>
+                              <th>E-mail</th>
+                              <th>Smtp Server</th>
+                              <th>Imap Server</th>
+                              <th> Actions</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let compte of comptes">
+                          <td *ngIf="compte.user_id == id_User" >{{compte.mail}}</td>
+                          <td *ngIf="compte.user_id == id_User"  >{{compte.smtpServer}}</td>
+                          <td *ngIf="compte.user_id == id_User" >{{compte.imapServer}}</td>
+                              <td *ngIf="compte.user_id == id_User" >
+                                <button class="btn btn-outline-warning btn-circle  m-r-5 " data-toggle="tooltip" data-original-title="Edit" (click)="operation ='Modifier' ;selected=compte"><i class="fa fa-pencil font-14"></i></button>
+                               
+                                <button class="btn btn-outline-danger btn-circle " data-toggle="tooltip" (click)="operation ='Supprimer'; selected=compte ;  " data-original-title="Delete"  ><i class="fa fa-trash font-14"></i></button>
+                            </td>
+                          </tr>
+                      
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+      </div>
+      <div class="col-xl-4">
+
+          <div class="ibox">
+              <div class="ibox-head">
+                  <div class="ibox-title">{{operation == 'Modifier' ? 'Modifier Compte' :
+                    operation == 'Delete' ? 'Supprimer Compte' :
+                    operation == 'Ajouter' ? 'Ajouter Compte' : ' choisir l opération'
+                }}</div>
+                  <div class="ibox-tools">
+                      <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
+                  </div>
+              </div>
+                  <div class="ibox-body">
+                      <form class="form-horizontal"  [formGroup]="AddCompte" novalidate="novalidate" >
+                         
+                 
+                        <div class="form-group row"  *ngIf=" operation == 'Ajouter'" >
+                            <label class="col-sm-12 col-form-label">Nom complet</label>
+
+                              <div class="col-sm-12">
+                                  <input class="form-control input-rounded"  placeholder="Entrer le nom complet" formControlName="name" type="text" name="name" required >
+                              </div>
+                          </div>
+                          
+                          <div class="form-group row"  *ngIf=" operation == 'Ajouter'">
+                              <label class="col-sm-12 col-form-label">Adresse email</label>
+                              <div class="col-sm-12">
+                                  <input class="form-control input-rounded"  placeholder="...@example.com" formControlName="mail" type="text" name="email" required  >                                  
+                              </div>
+                              
+                          </div>  
+                          <div class="form-group row"  *ngIf=" operation == 'Ajouter'">
+                              <label class="col-sm-12 col-form-label">SMTP Server</label>
+                              <div class="col-sm-12">
+                                  <input class="form-control input-rounded"  placeholder="smtp.example.com" formControlName="smtpServer" type="text" name="smptServer" required  >                                  
+                              </div>
+                              
+                          </div>      
+                      
+                          <div class="form-group row" *ngIf=" operation == 'Ajouter'">
+                              <label class="col-sm-12 col-form-label">SMTP Port</label>
+                              <div class="col-sm-12">
+                                  <input class="form-control input-rounded" type="number" name="numérosmtp" formControlName="smtpPort" placeholder="Entrer numéro de la port">
+                              </div>
+                          </div>
+                          <div class="form-group row"  *ngIf=" operation == 'Ajouter'">
+                              <label class="col-sm-12 col-form-label">Imap Server</label>
+                              <div class="col-sm-12">
+                                  <input class="form-control input-rounded"  placeholder="imap.example.com" formControlName="imapServer" type="text" name="imapServer" required  >                                  
+                              </div>
+                              
+                          </div>    
+                        
+                          <div class="form-group row" *ngIf=" operation == 'Ajouter'">
+                              <label class="col-sm-12 col-form-label">Mot de passe</label>
+                              <div class="col-sm-12">
+                                  <input class="form-control input-rounded"  type="password" id="password"  formControlName="mtp" name="password" placeholder="le mot de passe" required>
+                              </div>
+                          </div>
+                          <div class="form-group row" *ngIf=" operation == 'Ajouter'">
+                              <label class="col-sm-12 col-form-label">Confirmer le mot de passe</label>
+                              <div class="col-sm-12 ml-sm-auto">
+                                  <input class="form-control input-rounded" type="password" name="password_confirmation" placeholder="confirmer le mot de passe" required>
+                              </div>
+                          </div>
+
+                        
+                        
+                          <div class="form-group row"  *ngIf=" operation == 'Ajouter'">
+                              <div class="col-sm-12 ml-sm-auto">
+                                  <button type="reset" class="btn btn-default">Cancel</button>
+                                  <button  type="submit" [disabled]= "AddCompte.prestine || AddCompte.invalid" class="  pull-right btn btn-info notika-btn-cyan"  (click)="processForm(-1)"   (click)="operation ='Add'; "  >Ajouter</button>
+                              </div>
+                          </div>
+                      </form>
+                      <form class="form-horizontal" [formGroup]="Editcompte" novalidate="novalidate" >
+                         
+                 
+                        <div class="form-group row"  *ngIf=" operation == 'Modifier'" >
+                            <label class="col-sm-12 col-form-label">Nom complet</label>
+
+                              <div class="col-sm-12">
+                                  <input class="form-control input-rounded"  placeholder="Entrer le nom complet"  [(ngModel)]="selected.name" formControlName="name" type="text" name="name" required >
+                              </div>
+                          </div>
+                          
+                          <div class="form-group row"  *ngIf=" operation == 'Modifier'">
+                              <label class="col-sm-12 col-form-label">Adresse email</label>
+                              <div class="col-sm-12">
+                                  <input class="form-control input-rounded"  placeholder="...@example.com"  [(ngModel)]="selected.mail" formControlName="mail" type="text" name="email" required  >                                  
+                              </div>
+                              
+                          </div>  
+                          <div class="form-group row"  *ngIf=" operation == 'Modifier'">
+                              <label class="col-sm-12 col-form-label">SMTP Server</label>
+                              <div class="col-sm-12">
+                                  <input class="form-control input-rounded"  placeholder="smtp.example.com"  [(ngModel)]="selected.smtpServer" formControlName="smtpServer" type="text" name="smptServer" required  >                                  
+                              </div>
+                              
+                          </div>      
+                      
+                          <div class="form-group row" *ngIf=" operation == 'Modifier'">
+                              <label class="col-sm-12 col-form-label">SMTP Port</label>
+                              <div class="col-sm-12">
+                                  <input class="form-control input-rounded" type="number" name="numérosmtp"  [(ngModel)]="selected.smtpPort" formControlName="smtpPort" placeholder="Entrer numéro de la port">
+                              </div>
+                          </div>
+                          <div class="form-group row"  *ngIf=" operation == 'Modifier'">
+                              <label class="col-sm-12 col-form-label">Imap Server</label>
+                              <div class="col-sm-12">
+                                  <input class="form-control input-rounded"  placeholder="imap.example.com"  [(ngModel)]="selected.imapServer" formControlName="imapServer" type="text" name="pop3Server" required  >                                  
+                              </div>
+                              
+                          </div>    
+                         
+                          <div class="form-group row" *ngIf=" operation == 'Modifier'">
+                              <label class="col-sm-12 col-form-label">Mot de passe</label>
+                              <div class="col-sm-12">
+                                  <input class="form-control input-rounded"  type="password" id="password"   formControlName="mtp" name="password" placeholder="le mot de passe" required>
+                              </div>
+                          </div>
+                          <div class="form-group row" *ngIf=" operation == 'Modifier'">
+                              <label class="col-sm-12 col-form-label">Confirmer le mot de passe</label>
+                              <div class="col-sm-12 ml-sm-auto">
+                                  <input class="form-control input-rounded" type="password" name="password_confirmation" placeholder="confirmer le mot de passe" required>
+                              </div>
+                          </div>
+
+                        
+                        
+                          <div class="form-group row"  *ngIf=" operation == 'Modifier'">
+                              <div class="col-sm-12 ml-sm-auto">
+                                  <button type="reset" class="btn btn-default">Cancel</button>
+                                  <button  type="submit" [disabled]= "Editcompte.prestine || Editcompte.invalid" class="  pull-right btn btn-info notika-btn-cyan"  (click)="processForm(selected.id)" (click)="operation ='Update'; " >Modifier</button>
+                              </div>
+                          </div>
+                      </form>
+                      
+                      <div  *ngIf="operation == 'Supprimer'" >
+                  
+                          <div class="alert alert-danger alert-dismissable fade show">
+                                <p>Vous voulez vraiment supprimer cette carnet ?</p>
+
+                            <p>
+                                <button class="btn btn-success"  (click)="deleteCompte(selected) " (click)="operation ='Delete'; ">Confirmer</button>
+                                <button class="btn btn-warning">Cancel</button>
+                            </p>
+                        </div>
+                          
+                      </div>
+                  </div>
+          
+          </div>
+        </div>
+  </div>
+</div>

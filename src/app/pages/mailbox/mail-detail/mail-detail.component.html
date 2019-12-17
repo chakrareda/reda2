@@ -1,0 +1,68 @@
+<div class="page-heading">
+  <h1 class="page-title">Mail View</h1>
+  <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+          <a href="index.html"><i class="la la-home font-20"></i></a>
+      </li>
+      <li class="breadcrumb-item">Mail View</li>
+  </ol>
+</div>
+<div class="page-content fade-in-up">
+  <div class="row">
+  
+      <div class="col-lg-12 col-md-12">
+          <div class="ibox" id="mailbox-container">
+              <div class="mailbox-header d-flex justify-content-between" style="border-bottom: 1px solid #e8e8e8;">
+                  <div>
+                      
+                      <h5 class="inbox-title">{{mails_send.object}}</h5>
+                      <div class="m-t-5 font-13">
+                          <span class="font-strong"> De : </span>
+                          <a class="text-muted m-l-5" href="javascript:;">{{mails_send.mail_emetteur}}</a>
+                      </div>
+                      <div class="m-t-5 font-13">
+                              <span class="font-strong">À : </span>
+                              <a class="text-muted m-l-5" href="javascript:;">{{mails_send.mail_recepteur}}</a>
+                      </div>
+                      <div class="m-t-5 font-13">
+                              <div class="p-r-10 font-13" href="javascript:;">{{mails_send.date | date :'full'}}</div>
+                      </div>
+                      <div class="p-r-10 font-13"></div>
+                  </div>
+
+                  <div class="inbox-toolbar m-l-20">
+                      <button class="btn btn-default btn-sm" data-action="reply" data-toggle="tooltip" data-original-title="Reply"><i class="fa fa-reply"></i></button>
+                      <button class="btn btn-default btn-sm" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></button>
+                      <button class="btn btn-default btn-sm" data-toggle="tooltip" data-original-title="Mark as important"><i class="fa fa-star-o"></i></button>
+                      <button class="btn btn-default btn-sm" data-toggle="tooltip" data-original-title="Reply"><i class="fa fa-print"></i></button>
+                  </div>
+              </div>
+              <div class="mailbox-body">
+                      {{mails_send.contents}}
+              </div>
+            
+          </div>
+      </div>
+  </div>
+  <style type="text/css">
+      .inbox-list li a {
+          color: inherit;
+      }
+      .inbox-list li a i {margin-right:5px}
+      .mailbox-header, .mailbox-body {padding: 15px}
+      .inbox-title {white-space: normal; margin: 8px 0; font-weight: 600;}
+      .mail-search {width:300px}
+      .inbox-toolbar {white-space: nowrap}
+      .table-inbox tr.unread {font-weight: 600;}
+      .table-inbox tr > td:first-child {padding-left:15px}
+
+      .mail-attachments .card{
+          width: 220px;
+          margin-bottom: 20px;
+          margin-right: 20px;
+      }
+      @media (max-width: 992px) {
+          .mail-search {width:100%}
+      }
+  </style>
+</div>

@@ -1,0 +1,79 @@
+<div class="page-heading">
+        <h1 class="page-title">Éléments envoyés</h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="index.html"><i class="la la-home font-20"></i></a>
+            </li>
+        </ol>
+    </div>
+    <div class="page-content fade-in-up">
+        <div class="row">
+           
+            <div class="col-lg-12 col-md-12">
+                <div class="ibox" id="mailbox-container">
+                    <div class="mailbox-header">
+                        <div class="d-flex justify-content-between">
+                            <div class="col-md-12">
+                                <input type="text" placeholder="Search Mail" class="form-control"  [(ngModel)]="searchText">
+                            
+                        </div>
+                        </div>
+                      
+                    </div>
+                    <div class="mailbox clf">
+                        <table class="table table-hover table-inbox" id="table-inbox">
+                            <tbody class="rowlinkx" data-link="row">
+                               
+                                <tr class="unread" data-id="3" *ngFor="let mail of mails_send.slice().reverse() | filter : searchText" >
+                                   
+                                    <td *ngIf=" mail.type == 'send' && mail.user_id == id_User ">
+                                        <a (click)="onSelect(mail)">{{mail.mail_recepteur}}</a>
+                                    </td>
+                                    <td *ngIf=" mail.type == 'send' && mail.user_id == id_User " class="mail-message">{{mail.object}}</td>
+                                    <td *ngIf=" mail.type == 'send' && mail.user_id == id_User " class="hidden-xs"></td>
+                                    <td *ngIf=" mail.type == 'send' && mail.user_id == id_User " class="mail-label hidden-xs"></td>
+                                    <td *ngIf=" mail.type == 'send' && mail.user_id == id_User " class="text-right">{{mail.date | date:'medium'}}</td>
+                                </tr>
+                               
+                            </tbody>
+                        </table>
+                        <ul class="pagination justify-content-end m-t-0 m-r-10">
+                            <li class="page-item">
+                                <a class="page-link" href="javascript:;" aria-label="Previous">
+                                    <span aria-hidden="true"><i class="fa fa-angle-left"></i></span>
+                                </a>
+                            </li>
+                            <li class="page-item active">
+                                <a class="page-link" href="javascript:;">1</a>
+                            </li>
+                            
+                            <li class="page-item">
+                                <a class="page-link" href="javascript:;" aria-label="Next"><i class="fa fa-angle-right"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <style type="text/css">
+            .inbox-list li a {
+                color: inherit;
+            }
+            .inbox-list li a i {margin-right:5px}
+            .mailbox-header, .mailbox-body {padding: 15px}
+            .inbox-title {white-space: normal; margin: 8px 0; font-weight: 600;}
+            .mail-search {width:300px}
+            .inbox-toolbar {white-space: nowrap}
+            .table-inbox tr.unread {font-weight: 600;}
+            .table-inbox tr > td:first-child {padding-left:15px}
+    
+            .mail-attachments .card{
+                width: 220px;
+                margin-bottom: 20px;
+                margin-right: 20px;
+            }
+            @media (max-width: 992px) {
+                .mail-search {width:100%}
+            }
+        </style>
+    </div>

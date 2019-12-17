@@ -1,0 +1,198 @@
+<hr>
+<div *ngIf="operation == 'Ajouter'" class="alert alert-success alert-dismissable fade show" >
+  <button class="close" data-dismiss="alert" aria-label="Close">×</button><strong>Succès!</strong> L'operation été bien fait.</div>
+<div *ngIf="operation == 'Modifier'" class="alert alert-warning alert-dismissable fade show">
+  <button class="close" data-dismiss="alert" aria-label="Close">×</button><strong>Succès!</strong> L'operation été bien fait.</div>
+  <div  *ngIf="operation == 'Supprimer'" class="alert alert-danger alert-dismissable fade show">
+    <button class="close" data-dismiss="alert" aria-label="Close">×</button><strong>Succès!</strong> L'operation été bien fait.</div>
+  
+
+
+<div class="page-heading">
+  <h1 class="page-title">Carnet</h1>
+  <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+          <a href="index.html"><i class="la la-home font-20"></i></a>
+      </li>
+  </ol>
+</div>
+<div class="page-content fade-in-up">
+  <div class="row">
+    <div class="col-xl-7">
+          <div class="ibox">
+              <div class="ibox-head">
+                  <div class="ibox-title">
+                      Liste des groupes
+                 </div>
+                 <button class="pull-right btn btn-outline-primary fa fa-plus-circle " (click)="operation ='Add'; " > Ajouter nouveau groupe </button>
+
+              </div>
+              <div class="ibox-body">
+                  <table class="table"  *ngIf="carnets">
+                      <thead>
+                          <tr>
+                             
+                              <th>Nom</th>
+                              <th>La date de création</th>
+                              <th> Actions</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let group of carnets">
+                            
+                            <td *ngIf="group.user_id == id_User">{{group.name}}</td>
+                            <td *ngIf="group.user_id == id_User">{{group.date | date :'medium'}}</td>
+                              <td *ngIf="group.user_id == id_User">
+                                <button class="btn btn-outline-warning btn-circle  m-r-5 " data-toggle="tooltip" data-original-title="Update" (click)="operation ='Update' ;selected=group"><i class="fa fa-pencil font-14"></i></button>
+                                <button class="btn btn-outline-danger btn-circle m-r-5 " data-toggle="tooltip" data-original-title="Delete" (click)="operation ='Delete' ;selected=group"><i class="fa fa-trash font-14"></i></button>
+                                <button class="btn btn-outline-primary btn-circle   " data-toggle="tooltip" data-original-title="View" (click)="operation ='View' ;selected=group"><i class="fa fa-eye font-14"></i></button>
+
+                            </td>
+                          </tr>
+                      
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+    
+    </div>
+      
+    <div class="col-xl-5">
+          <div class="ibox">
+              <div class="ibox-head">
+                  <div class="ibox-title">
+                     {{ operation == 'View' ? ' Les contacts'  :
+                        operation == 'Update' ? 'Modifier Carnet' :
+                        operation == 'Add' ? 'Ajouter un nouveau Carnet' :
+                        operation == 'Delete' ? 'Confirmation de la suppression du Carnet' : ' choisir l opération'
+                      }}
+                    
+                </div>
+                <button *ngIf=" operation == 'View'" class="pull-right btn btn-outline-primary fa fa-plus-circle " (click)="opt ='AddMails'; " > Ajouter </button>
+                  
+              </div>
+                  <div class="ibox-body">
+                      <form class="form-horizontal"  [formGroup]="AddGroup" novalidate="novalidate" >
+                         
+                 
+                        <div class="form-group row"  *ngIf=" operation == 'Add'" >
+                            <label class="col-sm-12 col-form-label">Nom complet</label>
+
+                              <div class="col-sm-12">
+                                  <input class="form-control input-rounded"  placeholder="Entrer le nom complet" formControlName="name" type="text" name="name" required >
+                              </div>
+                          </div>                                          
+                        
+                          <div class="form-group row"  *ngIf=" operation == 'Add'">
+                              <div class="col-sm-12 ml-sm-auto">
+                                  <button type="reset" class="btn btn-default">Cancel</button>
+                                  <button  type="submit" [disabled]= "AddGroup.prestine || AddGroup.invalid" class="  pull-right btn btn-info notika-btn-cyan"  (click)="processForm(-1)"   (click)="operation ='Ajouter'; "  >Ajouter</button>
+                              </div>
+                          </div>
+                      </form>
+                      <form class="form-horizontal" [formGroup]="EditGroup" novalidate="novalidate" >
+                         
+                        <div class="form-group row"  *ngIf=" operation == 'Update'" >
+                            <label class="col-sm-12 col-form-label">Nom complet</label>
+
+                              <div class="col-sm-12">
+                                  <input class="form-control input-rounded"  placeholder="Entrer le nom complet"  [(ngModel)]="selected.name" formControlName="name" type="text" name="name" required >
+                              </div>
+                          </div>
+                          
+                          
+                          <div class="form-group row"  *ngIf=" operation == 'Update'">
+                              <div class="col-sm-12 ml-sm-auto">
+                                  <button type="reset" class="btn btn-default">Cancel</button>
+                                  <button  type="submit" [disabled]= "EditGroup.prestine || EditGroup.invalid" class="  pull-right btn btn-info notika-btn-cyan"  (click)="processForm(selected.id)" (click)="operation ='Modifier'; " >Modifier</button>
+                              </div>
+                          </div>
+                      </form>
+                      <div class="ibox"  *ngIf=" operation == 'View'">
+                            <form class="form-horizontal"  [formGroup]="AddMail" novalidate="novalidate" >
+                                    <div class="form-group row"  *ngIf=" opt == 'AddMails'" >
+            
+                                          <div class="col-sm-12">
+                                              <input class="form-control input-rounded"  placeholder="Entrer le mail" formControlName="mail" type="text" name="mail" required >
+                                          </div>
+                                      </div>                                          
+                                    
+                                      <div class="form-group row"  *ngIf=" opt == 'AddMails'">
+                                          <div class="col-sm-12 ml-sm-auto">
+                                              <button type="reset" class="btn btn-default">Cancel</button>
+                                              <button  type="submit" [disabled]= "AddMail.prestine || AddMail.invalid" class="  pull-right btn btn-info notika-btn-cyan"  (click)="processFormContacts(-1,selected.id)"(click)="operation=' ' ;"   (click)="opt =' '; "  >Ajouter</button>
+                                          </div>
+                                      </div>
+                            </form>   
+                            <form class="form-horizontal"  [formGroup]="EditMail" novalidate="novalidate" >
+                                    <div class="form-group row"  *ngIf=" opt == 'UpdateMails'" >
+            
+                                          <div class="col-sm-12">
+                                              <input class="form-control input-rounded"  placeholder="Entrer le mail"  [(ngModel)]="select.mail" formControlName="mail" type="text" name="mail" required >
+                                          </div>
+                                      </div>                                          
+                                    
+                                      <div class="form-group row"  *ngIf=" opt == 'UpdateMails'">
+                                          <div class="col-sm-12 ml-sm-auto">
+                                              <button type="reset" class="btn btn-default">Cancel</button>
+                                              <button  type="submit" [disabled]= "EditMail.prestine || EditMail.invalid" class="  pull-right btn btn-info notika-btn-cyan"  (click)="processFormContacts(select.id,selected.id)"     (click)="opt =' '; " >Ajouter</button>
+                                          </div>
+                                      </div>
+                            </form>  
+                             <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th colspan="2">Mail</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                          
+                                          <tr *ngFor="let contact of  selected.contacts">
+                                                  <!--  <td *ngIf=" contact.idgroupe == selected.id" colspan="2">{{contact.mail}}</td>
+                                                    <td *ngIf=" contact.idgroupe == selected.id">
+                                                   --> 
+                                                   <td   colspan="2">{{contact.mail}}</td>
+                                                    <td >
+                                                      <button class="btn btn-outline-warning btn-circle  m-r-5 " data-toggle="tooltip" data-original-title="UpdateMails" (click)="opt ='UpdateMails' ;select=contact"><i class="fa fa-pencil font-14"></i></button>
+                                                      <button class="btn btn-outline-danger btn-circle m-r-5 " data-toggle="tooltip" data-original-title="DeleteMails" (click)="opt ='DeleteMails' ;select=contact"><i class="fa fa-trash font-14"></i></button>
+        
+                                                  </td>
+                                           </tr>
+                                        
+                                        </tbody>
+                             </table>
+
+                      </div>
+                      <div class="ibox"   *ngIf="opt == 'DeleteMails'">
+                            <div class="alert alert-danger alert-dismissable fade show">
+                            
+                                    <p>Vous voulez vraiment supprimer cette contact ?</p>
+                                    <p>
+                                        <button class="btn btn-success" (click)="deleteContact(select) " (click)="opt =''; "  (click)="operation=' ' ;">Confirmer</button>
+                                        <button class="btn btn-warning">Annuler</button>
+                                    </p>
+                                </div>
+                      </div>
+                      
+
+                      <div  *ngIf="operation == 'Delete'" >
+                  
+                          <div class="alert alert-danger alert-dismissable fade show">
+                            
+                            <p>Vous voulez vraiment supprimer cette carnet ?</p>
+                            <p>
+                                <button class="btn btn-success"  (click)="operation ='Delete' ;  " (click)="deleteCarnet(selected) " (click)="operation ='Supprimer'; "  > Confirmer</button>
+                                <button class="btn btn-warning">Annuler</button>
+                            </p>
+                        </div>
+                          
+                      </div>
+                  </div>
+          
+          </div>
+    </div>
+      
+  </div>
+</div>
+    

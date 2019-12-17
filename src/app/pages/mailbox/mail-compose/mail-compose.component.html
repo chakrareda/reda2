@@ -1,0 +1,127 @@
+<div class="page-heading">
+    <h1 class="page-title">Écrire un email</h1>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="/index"><i class="la la-home font-20"></i></a>
+        </li>
+    </ol>
+</div>
+<div class="page-content fade-in-up">
+    <div class="row">
+        <div class="col-lg-1 col-md-1" >
+        </div>
+        <div class="col-lg-10 col-md-10" >
+            <div class="ibox" id="mailbox-container">
+                <div class="mailbox-header d-flex justify-content-between">
+                    <h5 class="inbox-title">Nouveau courrier</h5>
+                    <div class="inbox-toolbar m-l-20">
+                        <button class="btn btn-default btn-sm" data-action="reply" data-toggle="tooltip" data-original-title="Reply"><i class="fa fa-reply"></i></button>
+                        <button class="btn btn-default btn-sm" data-action="delete" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash-o"></i></button>
+                    </div>
+                </div>
+                <div class="mailbox-body">
+                    <form class="form-horizontal" action="javascript:void(0)"  if="compose_form"  [formGroup]="SendMail">
+                      
+                        <div class="form-group row">
+                                    <label class="col-sm-2 control-label">De :</label>
+                                    <div class="col-sm-10">
+                                            <select class="form-control  input-sm"  formControlName="mail_emetteur"  name="mail_emetteur">
+                                                   <optgroup label="Mes Comptes ">
+                                                            <option  *ngFor="let compte of comptes"  value="{{compte.mail}}" >
+                                                                {{compte.mail}}
+                                                            </option>
+                                                    </optgroup>
+                                            </select>
+                                    </div>
+                                   
+                        </div> 
+                        <div class="form-group row">
+                                    <label class="col-sm-2 control-label">Mail:</label>
+
+                                <div class="col-sm-10" class="m-b-10">
+                                        <label class="ui-radio ui-radio-info">
+                                                <input type="radio" name="test2" (click)="opt ='B'; ">
+                                                <span class="input-span"></span> À Contact  </label>
+                                                
+                                                <label class="ui-radio ui-radio-info">
+                                                <input type="radio" checked name="test2" (click)="opt ='A'; ">
+                                                <span class="input-span"></span> À Carnet</label>
+                                  
+                                </div>
+                          
+                                       
+                        </div>
+
+                        <div class="form-group row" *ngIf=" opt != 'B'">
+                                <label class="col-sm-2 control-label">À Carnet:</label>
+                                <div class="col-sm-10">
+                                        <select class="form-control  input-sm"  formControlName="mail_recepteur"  name="mail_recepteur">
+                                            <optgroup label=Carnet >
+                                                <option *ngFor="let group of carnets "  value="{{group.name}}" >
+                                                    {{group.name}}
+                                                </option>
+                                            </optgroup>
+                                        </select>
+                                </div>
+                               
+                        </div> 
+                            
+                        <div class="form-group row" *ngIf=" opt == 'B'">
+                            <label class="col-sm-2 ontrol-label">À Contact:</label>
+                               <div class="col-sm-10">
+                                    <input  class="form-control" type="text" name="mail_recepteur" formControlName="mail_recepteur">
+
+                                </div>
+                               
+                        </div>
+                          
+                        <div class="form-group row">
+                                    <label class="col-sm-2 ontrol-label">Object:</label>
+                                 <div class="col-sm-10">
+                                            <input  class="form-control"   type="text" name="object" formControlName="object">
+
+                                 </div>
+                                       
+                        </div>
+                            
+                               <!--
+                            id="contents"
+                      -->
+                        <textarea   name="contents"  class="form-control" formControlName="contents">
+                            <h4>Thank you for your attention</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur velit, corporis iste. Dolorem sapiente at, quibusdam fuga ea voluptatem iste. Cupiditate dignissimos, iure impedit, perferendis in beatae fuga
+                                voluptate, sapiente pariatur, libero ab odit. Placeat saepe sunt ipsam laboriosam temporibus nostrum ea optio, dolore soluta.</p>
+                        </textarea>
+                       
+                      
+                        <button type="submit"  class="btn btn-info m-t-20" (click)="procesForm()" >Envoyer</button>
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+ 
+
+    <style type="text/css">
+        .inbox-list li a {
+            color: inherit;
+        }
+        .inbox-list li a i {margin-right:5px}
+        .mailbox-header, .mailbox-body {padding: 15px}
+        .inbox-title {white-space: normal; margin: 8px 0; font-weight: 600;}
+        .mail-search {width:300px}
+        .inbox-toolbar {white-space: nowrap}
+        .table-inbox tr.unread {font-weight: 600;}
+        .table-inbox tr > td:first-child {padding-left:15px}
+
+        .mail-attachments .card{
+            width: 220px;
+            margin-bottom: 20px;
+            margin-right: 20px;
+        }
+        @media (max-width: 992px) {
+            .mail-search {width:100%}
+        }
+    </style>
+    
+</div>
